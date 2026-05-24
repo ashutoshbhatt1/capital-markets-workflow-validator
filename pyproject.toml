@@ -1,7 +1,7 @@
 [project]
-name = "backend-workflow-automation"
+name = "capital-markets-workflow-validator"
 version = "0.1.0"
-description = "Sanitized portfolio project for Python backend workflow automation and validation."
+description = "Sanitized portfolio project for Python backend workflow validation inspired by capital markets systems."
 requires-python = ">=3.11"
 dependencies = []
 

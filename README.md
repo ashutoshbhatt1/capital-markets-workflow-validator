@@ -1,15 +1,15 @@
-# Backend Workflow Automation Platform
+# Capital Markets Workflow Validator
 
-Sanitized portfolio project demonstrating an end-to-end Python backend automation and validation workflow.
+Sanitized portfolio project demonstrating an end-to-end Python backend automation and validation workflow inspired by futures-market systems.
 
-This repository intentionally abstracts domain-specific rules and sensitive implementation details. The focus is on backend system design, test automation, JSON data validation, approval workflows, dry-run API execution, audit logging, and replay-based E2E testing.
+This repository intentionally abstracts strategy logic and sensitive implementation details. The focus is on capital-markets-style backend system design, test automation, JSON data validation, approval workflows, dry-run API execution, audit logging, and replay-based E2E testing.
 
 ## What It Demonstrates
 
 - Python backend workflow orchestration
-- JSON/JSONL event ingestion and normalization
+- Event-driven JSON/JSONL ingestion and normalization
 - Configurable rule evaluation
-- Safety limits and manual approval gates
+- Risk-style safety limits and manual approval gates
 - Dry-run REST API adapter pattern
 - Audit logging and monitoring snapshots
 - Pytest-based functional and integration testing
@@ -19,11 +19,11 @@ This repository intentionally abstracts domain-specific rules and sensitive impl
 ## Architecture
 
 ```text
-JSONL replay feed
+JSONL market/event replay feed
   -> Event parser
   -> Normalizer
   -> Rule engine
-  -> Safety / approval controls
+  -> Risk-style safety / approval controls
   -> Dry-run API adapter
   -> Audit log and monitoring snapshot
 ```
@@ -75,6 +75,18 @@ The pytest suite validates:
 - Replay-based E2E workflow behavior
 - Monitoring snapshot counts and latest-state reporting
 
+## Career Relevance
+
+This project is designed to highlight backend quality engineering skills relevant to capital markets and trading technology roles:
+
+- Python-based test automation
+- Backend workflow validation
+- REST/JSON payload validation
+- Event-driven data processing
+- Functional, integration, and E2E test design
+- Risk-control and approval workflow testing
+- Operational readiness patterns for controlled releases
+
 ## AI-Assisted Engineering
 
 AI tools were used as engineering accelerators during project development:
@@ -88,4 +100,4 @@ Implementation choices, validation, and final project structure were kept hands-
 
 ## Notes
 
-This is a public portfolio version. Domain-specific strategy logic, proprietary research, credentials, account details, live execution settings, and sensitive operational data are intentionally excluded.
+This is a public portfolio version. Futures strategy logic, proprietary research, credentials, account details, live execution settings, and sensitive operational data are intentionally excluded.
