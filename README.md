@@ -101,3 +101,9 @@ Implementation choices, validation, and final project structure were kept hands-
 ## Notes
 
 This is a public portfolio version. Futures strategy logic, proprietary research, credentials, account details, live execution settings, and sensitive operational data are intentionally excluded.
+
+This repository is intended for educational and demonstration purposes only. It does not include live trading logic, proprietary strategies, credentials, or production execution code.
+
+## License
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE).
