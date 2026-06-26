@@ -75,6 +75,8 @@ The pytest suite validates:
 - Replay-based E2E workflow behavior
 - Monitoring snapshot counts and latest-state reporting
 
+See [docs/testing-strategy.md](docs/testing-strategy.md) for the testing strategy and pre-execution automation model.
+
 ## Career Relevance
 
 This project is designed to highlight backend quality engineering skills relevant to capital markets and trading technology roles:
