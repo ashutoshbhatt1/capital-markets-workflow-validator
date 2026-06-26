@@ -1,6 +1,6 @@
 # Testing Strategy
 
-This project is a sanitized portfolio version of a capital-markets workflow validator. The goal is not to validate a trading strategy or profitability. The goal is to validate the backend workflow around an execution-style system before anything reaches downstream execution.
+This project is a sanitized portfolio version of a capital-markets workflow validator. The goal is not to validate a strategy or profitability. The goal is to validate the backend workflow around an execution-style system before anything reaches downstream execution.
 
 ## What The Tests Cover
 
