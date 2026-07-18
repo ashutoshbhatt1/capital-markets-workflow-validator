@@ -1,111 +1,96 @@
-# Capital Markets Workflow Validator
+# FuturesPlaybook Guardian
 
-Sanitized portfolio project demonstrating an end-to-end Python backend automation and validation workflow inspired by futures-market systems.
+**Every decision explained. No guardrail crossed.**
 
-This repository intentionally abstracts strategy logic and sensitive implementation details. The focus is on capital-markets-style backend system design, test automation, JSON data validation, approval workflows, dry-run API execution, audit logging, and replay-based E2E testing.
+FuturesPlaybook Guardian is a read-only incident explainer for controlled capital-markets workflows. A deterministic validator makes every approve, review, or reject decision. GPT-5.6 Sol receives only a sanitized replay bundle, explains the decision with evidence IDs, identifies uncertainty, and proposes a regression test. It cannot approve a workflow, change a limit, or execute an action.
 
-## What It Demonstrates
+Built for the OpenAI Build Week hackathon, Developer Tools track.
 
-- Python backend workflow orchestration
-- Event-driven JSON/JSONL ingestion and normalization
-- Configurable rule evaluation
-- Risk-style safety limits and manual approval gates
-- Dry-run REST API adapter pattern
-- Audit logging and monitoring snapshots
-- Pytest-based functional and integration testing
-- Replay-driven E2E validation
-- Clean separation between ingestion, rules, controls, adapters, and monitoring
+![FuturesPlaybook Guardian social card](web/public/og.png)
 
-## Architecture
+## Why it matters
 
-```text
-JSONL market/event replay feed
-  -> Event parser
-  -> Normalizer
-  -> Rule engine
-  -> Risk-style safety / approval controls
-  -> Dry-run API adapter
-  -> Audit log and monitoring snapshot
-```
+Operational teams often have logs and controls but no fast, trustworthy explanation of *why* a workflow stopped. Guardian turns an audit trail into a concise incident brief while keeping authority in deterministic code and human approval gates.
 
-## Project Structure
+The demo makes the boundary visible:
 
-```text
-src/workflow_automation/
-  adapters.py      Dry-run API adapter and payload generation
-  controls.py      Approval queue and execution safety gate
-  engine.py        E2E workflow orchestration
-  feeds.py         JSONL event parsing and normalization
-  models.py        Backend workflow domain models
-  monitoring.py    Audit log and operational snapshots
-  rules.py         Generic configurable rule evaluation
+- deterministic Python rules remain authoritative;
+- GPT-5.6 Sol is restricted to explanation and test recommendation;
+- structured output must cite supplied event or decision IDs;
+- `execution_authorized` can only be `false`;
+- the adapter stays in dry-run mode and the UI permanently shows execution disabled.
 
-tests/
-  test_adapters.py
-  test_e2e_workflow.py
-  test_feeds.py
-  test_rules.py
-```
+## Run the replay demo
 
-## Run Tests
+Python 3.11 or newer is required. The default command uses verified fixtures, so no API key is needed.
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate
 python -m pip install -e ".[dev]"
-pytest
+PYTHONPATH=src python examples/run_guardian_demo.py --scenario limit-breach
 ```
 
-## Run Replay Example
+Available scenarios are `limit-breach`, `approval-drift`, and `thin-evidence`.
+
+To exercise the real Responses API, set the key in your shell—never commit or paste it into the application—and add `--live`:
 
 ```bash
-PYTHONPATH=src python examples/replay_sample.py
+export OPENAI_API_KEY="your-key"
+PYTHONPATH=src python examples/run_guardian_demo.py --scenario limit-breach --live
 ```
 
-## Testing Focus
+The live path defaults to `gpt-5.6-sol`, medium reasoning, strict JSON-schema output, and `store: false`. Override `OPENAI_MODEL` only when intentionally testing another compatible model.
 
-The pytest suite validates:
+## Run the control room
 
-- JSON event parsing and timestamp normalization
-- Data transformation into typed backend models
-- Business-rule outcomes such as approve, review, and reject
-- Manual approval queue behavior
-- Dry-run API payload generation
-- Environment-style execution safety gates
-- Replay-based E2E workflow behavior
-- Monitoring snapshot counts and latest-state reporting
+```bash
+cd web
+npm install
+npm run dev
+```
 
-See [docs/testing-strategy.md](docs/testing-strategy.md) for the testing strategy and pre-execution automation model.
+Open `http://localhost:3000`. The dashboard works without credentials using the three deterministic replay briefs. For a local live explanation, copy `web/.env.example` to `web/.env.local`, set the key, and explicitly set `ENABLE_LIVE_AI=true`.
 
-## Career Relevance
+## Architecture
 
-This project is designed to highlight backend quality engineering skills relevant to capital markets and trading technology roles:
+```text
+sanitized JSONL replay
+  -> deterministic rule engine
+  -> safety + manual-approval gates
+  -> audit bundle (allowlisted fields only)
+  -> GPT-5.6 Sol structured explanation
+  -> evidence-backed incident brief
 
-- Python-based test automation
-- Backend workflow validation
-- REST/JSON payload validation
-- Event-driven data processing
-- Functional, integration, and E2E test design
-- Risk-control and approval workflow testing
-- Operational readiness patterns for controlled releases
+execution path: permanently disabled in this edition
+```
 
-## AI-Assisted Engineering
+Key files:
 
-AI tools were used as engineering accelerators during project development:
+- `src/workflow_automation/guardian.py` builds the allowlisted AI bundle and offline briefs.
+- `src/workflow_automation/ai_explainer.py` implements the Responses API contract.
+- `examples/run_guardian_demo.py` runs all three replay scenarios.
+- `web/` contains the interactive hackathon control room.
+- `evals/guardian_cases.jsonl` records the judge-visible safety expectations.
+- `docs/hackathon.md` contains the submission copy and three-minute demo script.
 
-- ChatGPT / OpenAI Codex for architecture planning
-- Test scenario ideation and edge-case review
-- Code review and refactoring support
-- Documentation and technical storytelling
+## Verification
 
-Implementation choices, validation, and final project structure were kept hands-on and reviewable.
+```bash
+pytest -q
+cd web && npm test
+```
 
-## Notes
+The suite checks the original workflow validator, the permanent execution boundary, the strict Sol request shape, all replay expectations, and the rendered dashboard.
 
-This is a public portfolio version. Futures strategy logic, proprietary research, credentials, account details, live execution settings, and sensitive operational data are intentionally excluded.
+## Safety and scope
 
-This repository is intended for educational and demonstration purposes only. It does not include live trading logic, proprietary strategies, credentials, or production execution code.
+This public repository contains sanitized synthetic events only. It excludes strategy logic, credentials, account details, production endpoints, and live execution code. It is an educational workflow-observability demonstration, not trading or investment advice.
+
+## Built with OpenAI
+
+GPT-5.6 Sol powers the bounded incident-explanation step through the Responses API. Codex was used to turn the underlying validator into the hackathon edition, add adversarial safety tests, create the interface, and document the review path. Human review remains required for every state-changing decision.
 
 ## License
 
-This project is licensed under the MIT License. See [LICENSE](LICENSE).
+MIT. See [LICENSE](LICENSE).

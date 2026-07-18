@@ -1,7 +1,7 @@
 [project]
 name = "capital-markets-workflow-validator"
-version = "0.1.0"
-description = "Sanitized portfolio project for Python backend workflow validation inspired by capital markets systems."
+version = "0.2.0"
+description = "Read-only GPT-5.6 Sol incident explainer for deterministic workflow controls."
 requires-python = ">=3.11"
 dependencies = []
 

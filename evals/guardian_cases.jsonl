@@ -1,0 +1,3 @@
+{"scenario_id":"limit-breach","expected_severity":"high","expected_decision":"reject","required_evidence_ids":["evt-limit-105"],"execution_authorized":false}
+{"scenario_id":"approval-drift","expected_severity":"caution","expected_decision":"review","required_evidence_ids":["evt-review-085"],"execution_authorized":false}
+{"scenario_id":"thin-evidence","expected_severity":"caution","expected_decision":"review","required_evidence_ids":["evt-thin-045"],"execution_authorized":false}
